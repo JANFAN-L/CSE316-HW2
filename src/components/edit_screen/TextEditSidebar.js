@@ -13,6 +13,7 @@ class TextEditSidebar extends Component {
     }
 
     handleUndo = () => {
+        
         this.props.undoCallback();
     }
 
