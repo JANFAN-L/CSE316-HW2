@@ -19,6 +19,8 @@ export const TransactionType = {
   CHANGE_LOGO: "CHANGE_LOGO"
 }
 
+
+
 // DEFAULT VALUES FOR A BRAND NEW LOGO
 export const LogoDefaults = {
   TEXT : "goLogoLo Logo",
