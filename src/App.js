@@ -154,7 +154,7 @@ class App extends Component {
       key: logoKey,
       text: newText,
       textColor: newTextColor,
-      fontSize: newFontSize
+      fontSize: newFontSize,
     };
 
     // NOW BUILD THE TRANSACTION OBJECT
