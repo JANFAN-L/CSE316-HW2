@@ -15,6 +15,7 @@ class ChangeLogo_Transaction extends jsTPS_Transaction {
     undoTransaction() {
         this.changeLogoCallback(this.oldLogo);
     }
+
 }
 
 export default ChangeLogo_Transaction

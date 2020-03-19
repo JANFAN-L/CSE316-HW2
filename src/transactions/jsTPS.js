@@ -12,6 +12,10 @@ export class jsTPS_Transaction {
     undoTransaction() {
         console.log("undoTransaction - MISSING IMPLEMENTATION");
     }
+
+    redoTransaction(){
+        console.log("redoTransaction - MISSING IMPLEMENTATION");
+    }
 }
 
 export class jsTPS {

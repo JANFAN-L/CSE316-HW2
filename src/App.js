@@ -147,7 +147,7 @@ class App extends Component {
    * to do the actual work of changing the logo. Note that this function will also
    * then add the built transaction to the stack and execute it.
    */
-  buildChangeLogoTransaction = (oldLogo, logoKey, newText, newTextColor, newFontSize) => {
+  buildChangeLogoTransaction = (oldLogo, logoKey, newText, newTextColor, newFontSize, newBackgroundColor, newBorderColor, newBorderRadius, newBorderThickness, newPadding, newMargin) => {
     // THIS WILL BE THE LOGO AFTER THE CHANGE HAPPENS, NOTE WE BUILD
     // AN ENTIRELY NEW LOGO EACH TIME BUT IT SHOULD KEEP THE SAME KEY
     let postEditLogo = {
@@ -155,6 +155,12 @@ class App extends Component {
       text: newText,
       textColor: newTextColor,
       fontSize: newFontSize,
+      backgroundColor:newBackgroundColor,
+      borderColor: newBorderColor,
+      borderRadius: newBorderRadius,
+      borderThickness: newBorderThickness,
+      padding: newPadding,
+      margin: newMargin
     };
 
     // NOW BUILD THE TRANSACTION OBJECT
@@ -174,7 +180,9 @@ class App extends Component {
   undo = () => {
     this.tps.undoTransaction();
   }
-
+  redo = () =>{
+    this.tps.doTransaction();
+  }
   /**
    * resetTransactions - This method clears all the transactions in
    * the undo/redo stack, which should be done every time the logo
@@ -191,6 +199,9 @@ class App extends Component {
    */
   canUndo = () => {
     return this.tps.hasTransactionToUndo();
+  }
+  canRedo =()=>{
+    return this.tps.hasTransactionToRedo();
   }
 
   // THERE ARE SEVEN FUNCTIONS FOR UPDATING THE App state, TWO OF
@@ -309,6 +320,12 @@ class App extends Component {
     text += "\ttext: " + logoToDisplay.text + "\n";
     text += "\ttextColor: " + logoToDisplay.textColor + "\n";
     text += "\tfontSize: " + logoToDisplay.fontSize + "\n";
+    text += "\tbackgroundColor: " + logoToDisplay.backgroundColor + "\n";
+    text += "\tborderColor: " + logoToDisplay.borderColor + "\n";
+    text += "\tborderRadius: " + logoToDisplay.borderRadius + "\n";
+    text += "\tborderThickness: " + logoToDisplay.borderThickness + "\n";
+    text += "\tpadding: " + logoToDisplay.padding + "\n";
+    text += "\tmargin: " + logoToDisplay.margin + "\n";
     text += "}";
     return text;
   }
@@ -346,8 +363,10 @@ class App extends Component {
           logo={this.state.currentLogo}                         // DATA NEEDED BY THIS COMPONENT AND ITS DESCENDANTS
           goToHomeCallback={this.goToHomeScreen}                    // NAVIGATION CALLBACK
           changeLogoCallback={this.buildChangeLogoTransaction}  // TRANSACTION CALLBACK
-          undoCallback={this.undo}                        // TRANSACTION CALLBACK                       
+          undoCallback={this.undo}                        // TRANSACTION CALLBACK               
+          redoCallback={this.redo}        
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
+          canRedo={this.canRedo}
 
         />;
       default:
