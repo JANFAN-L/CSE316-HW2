@@ -19,6 +19,9 @@ class Navbar extends React.Component {
     console.log("handleGoHome");
     this.props.goToHomeCallback();
   }
+  handleDelete =() =>{
+    console.log("handleDetele");
+  }
 
   render() {
     return (
@@ -32,6 +35,11 @@ class Navbar extends React.Component {
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li style={ {cursor: "pointer"} }>&#128465;</li>
           </ul>
+          <div
+            style={{cursor:"pointer"}}
+            onClick={this.handleDelete}>
+            delete
+          </div>
         </div>
       </nav>
     )
