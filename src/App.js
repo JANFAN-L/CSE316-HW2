@@ -117,7 +117,7 @@ class App extends Component {
 
     // SO FIRST REMOVE logo BY FILTERING IT OUT
     const nextLogos = this.state.logos.filter(testLogo =>
-      testLogo.key !== logo.key
+      testLogo.text !== logo.text
     );
 
     // THEN PREPENDS THE LOGO WE'LL BE EDITING
@@ -219,6 +219,11 @@ class App extends Component {
     let newLogoInList = [this.makeNewLogo()];
     let newLogosList = [...newLogoInList, ...this.state.logos];
     let newLogo = newLogoInList[0];
+    console.log("print********");
+    for(let position=0; position<newLogosList.length;position++){
+      let logo=newLogosList[position];
+      console.log(logo.text);
+    }
 
     // AND SET THE STATE, WHICH SHOULD FORCE A render
     this.setState({
@@ -245,9 +250,13 @@ class App extends Component {
 
     // UPDATE THE LIST OF LOGOS, REMOVING LOGO
     const nextLogos = this.state.logos.filter(testLogo =>
-      testLogo.key !== logoKey
+      testLogo.text !== logoKey
     );
-
+    console.log(nextLogos.text+"**********");
+    for(let x=0;x<nextLogos.length;x++){
+      let log=nextLogos[x];
+      console.log(log.text);
+    }
     console.log("size of nextLogos: " + nextLogos.length);
 
     // AND SET THE STATE, WHICH SHOULD FORCE A render
@@ -262,7 +271,7 @@ class App extends Component {
 
     // UPDATE THE LIST OF LOGOS, SUBSTITUTING THE UPDATED LOGO
     const nextLogos = this.state.logos.map((testLogo) => {
-      if (testLogo.key === newLogo.key) {
+      if (testLogo.text === newLogo.text) {
         return Object.assign({}, testLogo, newLogo);
       } else {
         return testLogo;
@@ -279,7 +288,7 @@ class App extends Component {
   completeLogosChange = (nextLogos) => {
     // NOW GET THE LOGO TO EDIT
     const nextLogoToEdit = nextLogos.find((testLogo) => {
-      return (testLogo.key === this.state.currentLogo.key);
+      return (testLogo.text === this.state.currentLogo.text);
     });
     console.log("nextLogoToEdit: " + nextLogoToEdit);
 
@@ -345,6 +354,10 @@ class App extends Component {
     }
     return text;
   }
+  tryDeleteLogo =() =>{
+    var currentLogo=this.state.currentLogo
+    this.deleteLogo(currentLogo.text);
+  }
 
   // THIS FUNCTION RENDERS THE App COMPONENT, AND THUS
   // CASCADES ALL NECESSARY props AND RENDERING THROUGH
@@ -363,6 +376,7 @@ class App extends Component {
           logo={this.state.currentLogo}                         // DATA NEEDED BY THIS COMPONENT AND ITS DESCENDANTS
           goToHomeCallback={this.goToHomeScreen}                    // NAVIGATION CALLBACK
           changeLogoCallback={this.buildChangeLogoTransaction}  // TRANSACTION CALLBACK
+          deleteCallback={this.tryDeleteLogo}
           undoCallback={this.undo}                        // TRANSACTION CALLBACK               
           redoCallback={this.redo}        
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
