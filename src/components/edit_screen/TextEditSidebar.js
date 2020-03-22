@@ -15,7 +15,8 @@ class TextEditSidebar extends Component {
             borderThickness: 0,
             padding:0,
             margin:0,
-            seen:false
+            seen:false,
+            temptext:""
         }
     }
 
@@ -80,6 +81,11 @@ class TextEditSidebar extends Component {
         });
         console.log(this.state.seen);
     }
+    handleTempText(value){
+        console.log("handleTempText "+value);
+        this.props.EditEnterCallback(value);
+    }
+
 
     render() {
         let undoDisabled = !this.props.canUndo();
@@ -97,7 +103,7 @@ class TextEditSidebar extends Component {
                         <div>
                         <button className="waves-effect waves-light btn-small" onClick={this.handleTextEdit}>&#9998;</button>
                         </div>
-                        {this.state.seen?<EnterTextEdit EnterTextEdit={this.handleTextEdit}/>:null}
+                        {this.state.seen?<EnterTextEdit EnterTextEdit={this.handleTextEdit} EditEnterCallback={this.handleTempText}/>:null}
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>

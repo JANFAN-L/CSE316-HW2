@@ -1,11 +1,12 @@
 import React,{Component} from 'react'
+//import App from '../../App';
 //import Nabar from './Navbar.js'
 //import TextEditSidebar from './TextEditSidebar' 
 //import TextEditWorkspace from './TextEditWorkspace'
 
 export class EnterTextEdit extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // DISPLAY WHERE WE ARE
         console.log("\tTextEditScreen constructor");
@@ -25,7 +26,7 @@ export class EnterTextEdit extends Component{
     handleEnter=()=>{
         console.log("handleEnter");
         console.log("the final name is"+this.state.value)
-        
+        this.props.EditEnterCallback(this.state.value);
     }
     handleCancel=()=>{
         console.log("handleCancel");
@@ -49,7 +50,7 @@ export class EnterTextEdit extends Component{
                 <div className="container">
                     <form onSubmit={this.handleSubmit}>
                         <div>Enter New Name</div>
-                        <p>
+                        <div>
                             <input type="text" value={this.state.value} onChange={this.handleChange}/>
                             <button
                             onClick={this.handleEnter}>
@@ -59,7 +60,7 @@ export class EnterTextEdit extends Component{
                             onClick={this.handleCancel}>
                             Cancel
                             </button>
-                        </p>
+                        </div>
                     </form>
                 </div>
             </div>

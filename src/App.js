@@ -371,8 +371,23 @@ class App extends Component {
     var currentLogo=this.state.currentLogo
     this.deleteLogo(currentLogo.text);
   }
-  editEnter=()=>{
-    
+  editEnter=(newText)=>{
+    let existSame=false;
+    const logos=this.state.logos;
+    for(let x=0;x<logos.length;x++){
+      let temp=logos[x];
+      if(temp.text===newText)
+        existSame=true;
+    }
+    if(newText===""&&!existSame){
+      console.log("there exist same name");
+    }else{
+      console.log("there is no same name");
+    }
+  }
+
+  editCancel=()=>{
+
   }
 
   // THIS FUNCTION RENDERS THE App COMPONENT, AND THUS
@@ -398,12 +413,14 @@ class App extends Component {
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
           canRedo={this.canRedo}
           textEditCallback={this.goToTextEditScreen}
+          EditEnterCallback={this.editEnter}
 
         />;
       case AppScreen.TEXT_EDIT_SCREEN:
         return<EnterTextEdit
         logo={this.state.currentLogo}
         EditEnterCallback={this.editEnter}
+        EditCancelCallback={this.editCancel}
         />;
       default:
         return <div></div>;
