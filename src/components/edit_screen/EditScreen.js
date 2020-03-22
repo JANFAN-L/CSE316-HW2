@@ -23,6 +23,10 @@ export class EditScreen extends Component {
     componentWillUnmount = () => {
         console.log("\tEditScreen component will unmount");
     }
+    handleTempText(value){
+        console.log(value);
+        this.props.EditEnterCallback(value);
+    }
 
     render() {
         // DISPLAY WHERE WE ARE

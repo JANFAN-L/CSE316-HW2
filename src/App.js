@@ -372,10 +372,14 @@ class App extends Component {
     this.deleteLogo(currentLogo.text);
   }
   editEnter=(newText)=>{
+    console.log("the new text"+newText);
     let existSame=false;
-    const logos=this.state.logos;
-    for(let x=0;x<logos.length;x++){
-      let temp=logos[x];
+    let Logos = this.state.logos
+    Logos.forEach(element => {
+      console.log(element.text)
+    });
+    for(let x=0;x<Logos.length;x++){
+      let temp=Logos[x];
       if(temp.text===newText)
         existSame=true;
     }
@@ -383,6 +387,9 @@ class App extends Component {
       console.log("there exist same name");
     }else{
       console.log("there is no same name");
+      let logo=this.state.currentLogo;
+      logo.text=newText;
+      this.afterLogosChangeComplete();
     }
   }
 

@@ -81,7 +81,7 @@ class TextEditSidebar extends Component {
         });
         console.log(this.state.seen);
     }
-    handleTempText(value){
+    handleTempText=(value)=>{
         console.log("handleTempText "+value);
         this.props.EditEnterCallback(value);
     }
@@ -103,7 +103,7 @@ class TextEditSidebar extends Component {
                         <div>
                         <button className="waves-effect waves-light btn-small" onClick={this.handleTextEdit}>&#9998;</button>
                         </div>
-                        {this.state.seen?<EnterTextEdit EnterTextEdit={this.handleTextEdit} EditEnterCallback={this.handleTempText}/>:null}
+                        {this.state.seen?<EnterTextEdit EnterTextEdit={this.handleTextEdit} EditEnterCallback={this.props.EditEnterCallback}/>:null}
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>
