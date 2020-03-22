@@ -5,11 +5,13 @@ import HomeScreen from './components/home_screen/HomeScreen'
 import EditScreen from './components/edit_screen/EditScreen'
 import jsTPS from './transactions/jsTPS.js'
 import ChangeLogo_Transaction from './transactions/ChangeLogo_Transaction.js'
+import EnterTextEdit from './components/edit_screen/EnterTextEdit';
 
 // THESE ARE THE App SCREENS
 const AppScreen = {
   HOME_SCREEN: "HOME_SCREEN",
-  EDIT_SCREEN: "EDIT_SCREEN"
+  EDIT_SCREEN: "EDIT_SCREEN",
+  TEXT_EDIT_SCREEN: "TEXT_EDIT_SCREEN"
 }
 
 // THESE ARE THE VARIOUS TRANSACTION TYPES
@@ -134,6 +136,14 @@ class App extends Component {
     });
   }
 
+  goToTextEditScreen=()=>{
+    console.log("go to edit text********")
+    this.setState({
+      currentScreen :AppScreen.TEXT_EDIT_SCREEN,
+      currentLogo:{}
+    });
+  }
+
   // FUNCTIONS FOR DEALING WITH THE TRANSACTION PROCESSING SYSTEM:
     // buildChangeLogoTransaction
     // undo
@@ -216,7 +226,10 @@ class App extends Component {
 
     // MAKE WHAT THE UPDATED LOGO WILL BE WITH THE NEW LOGO, MAKING
     // SURE THEY ARE FIRST, AND MAKE THAT NEW LOGO THE ONE WE'LL EDIT
+    this.goToTextEditScreen();
     let newLogoInList = [this.makeNewLogo()];
+    
+    
     let newLogosList = [...newLogoInList, ...this.state.logos];
     let newLogo = newLogoInList[0];
     console.log("print********");
@@ -229,7 +242,7 @@ class App extends Component {
     this.setState({
       logos: newLogosList,
       currentLogo: newLogo,
-      nextKey: newLogo.key
+      nextKey: newLogo.text
     }, this.afterLogosChangeComplete);
   }
 
@@ -358,6 +371,9 @@ class App extends Component {
     var currentLogo=this.state.currentLogo
     this.deleteLogo(currentLogo.text);
   }
+  editEnter=()=>{
+    
+  }
 
   // THIS FUNCTION RENDERS THE App COMPONENT, AND THUS
   // CASCADES ALL NECESSARY props AND RENDERING THROUGH
@@ -381,7 +397,13 @@ class App extends Component {
           redoCallback={this.redo}        
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
           canRedo={this.canRedo}
+          textEditCallback={this.goToTextEditScreen}
 
+        />;
+      case AppScreen.TEXT_EDIT_SCREEN:
+        return<EnterTextEdit
+        logo={this.state.currentLogo}
+        EditEnterCallback={this.editEnter}
         />;
       default:
         return <div></div>;
