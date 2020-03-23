@@ -383,7 +383,7 @@ class App extends Component {
       if(temp.text===newText)
         existSame=true;
     }
-    if(newText===""&&!existSame){
+    if(newText===""||existSame){
       console.log("there exist same name");
     }else{
       console.log("there is no same name");
