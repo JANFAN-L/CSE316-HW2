@@ -30,6 +30,7 @@ export class EnterTextEdit extends Component{
     }
     handleCancel=()=>{
         console.log("handleCancel");
+        this.props.handleCancelCallback();
     }
     handleName=()=>{
         console.log("name change");
@@ -52,6 +53,7 @@ export class EnterTextEdit extends Component{
                         <div>Enter New Name</div>
                         <div>
                             <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                            <div>
                             <button
                             onClick={this.handleEnter}>
                             Enter
@@ -60,6 +62,7 @@ export class EnterTextEdit extends Component{
                             onClick={this.handleCancel}>
                             Cancel
                             </button>
+                            </div>
                         </div>
                         
                     </form>

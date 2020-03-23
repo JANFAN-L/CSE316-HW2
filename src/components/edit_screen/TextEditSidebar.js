@@ -72,7 +72,7 @@ class TextEditSidebar extends Component {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
         this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.props.logo.text, this.state.textColor, this.state.fontSize, this.state.backgroundColor,this.state.borderColor, this.state.borderRadius
-            , this.state.borderThickness,this.state.margin, this.state.padding);
+            , this.state.borderThickness,this.state.padding, this.state.margin);
     }
     handleTextEdit = () =>{
         console.log("textEdit");
@@ -84,6 +84,12 @@ class TextEditSidebar extends Component {
     handleTempText=(value)=>{
         console.log("handleTempText "+value);
         this.props.EditEnterCallback(value);
+    }
+    handleCancel=()=>{
+        console.log("handlecancel");
+        this.setState({
+            seen:false
+        });
     }
 
 
@@ -103,7 +109,7 @@ class TextEditSidebar extends Component {
                         <div>
                         <button className="waves-effect waves-light btn-small" onClick={this.handleTextEdit}>&#9998;</button>
                         </div>
-                        {this.state.seen?<EnterTextEdit EnterTextEdit={this.handleTextEdit} EditEnterCallback={this.props.EditEnterCallback}/>:null}
+                        {this.state.seen?<EnterTextEdit EnterTextEdit={this.handleTextEdit} EditEnterCallback={this.props.EditEnterCallback} handleCancelCallback={this.handleCancel}/>:null}
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>

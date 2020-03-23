@@ -30,7 +30,11 @@ class HomeScreen extends Component {
     handleAddNewLogo = () => {
         this.props.addNewLogoCallback();
     }
-
+    handleCancel=()=>{
+        this.setState({
+            seen:false
+        });
+    }
     render() {
         // DISPLAY WHERE WE ARE
         console.log("\tHomeScreen render");
@@ -55,7 +59,7 @@ class HomeScreen extends Component {
                             onClick={this.handleAddNewText}>
                             Create a New Logo
                         </button>
-                        {this.state.seen?<EnterTextEdit EnterTextEdit={this.handleAddNewText} EditEnterCallback={this.props.EditEnterCallback}/>:null}
+                        {this.state.seen?<EnterTextEdit EnterTextEdit={this.handleAddNewText} EditEnterCallback={this.props.EditEnterCallback} handleCancelCallback={this.handleCancel}/>:null}
                     </div>
                 </div>
             </div>

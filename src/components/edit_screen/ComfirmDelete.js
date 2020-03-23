@@ -4,12 +4,12 @@ import React,{Component} from 'react'
 //import TextEditSidebar from './TextEditSidebar' 
 //import TextEditWorkspace from './TextEditWorkspace'
 
-export class EnterTextEdit extends Component{
+export class ComfirmDelete extends Component{
     constructor(props) {
         super(props);
 
         // DISPLAY WHERE WE ARE
-        console.log("\tTextEditScreen constructor");
+        console.log("\tComfirmDeletePrompt constructor");
 
         this.state = {  
             value:""
@@ -23,21 +23,16 @@ export class EnterTextEdit extends Component{
     componentWillUnmount = () => {
         console.log("\tTextEditScreen component will unmount");
     }
-    handleEnter=()=>{
+    handleComfirm=()=>{
         console.log("handleEnter");
-        console.log("the final name is"+this.state.value)
-        this.props.EditEnterCallback(this.state.value);
+        this.props.ConfirmDeleteCallback();
     }
     handleCancel=()=>{
         console.log("handleCancel");
-        this.props.handleCancelCallback();
+        this.props.CancelDeleteCallback();
     }
     handleName=()=>{
         console.log("name change");
-    }
-    handleSubmit=(event)=>{
-        console.log("the name submit is "+this.state.value)
-        event.preventDefault();
     }
     handleChange=(event)=>{
         this.setState({value: event.target.value});
@@ -47,27 +42,23 @@ export class EnterTextEdit extends Component{
         // DISPLAY WHERE WE ARE
         console.log("\tTextEditScreen render");
         return (
-            <div className="container">
+            <div className="container" style={{float: 'right'}}>
                 <div className="container">
-                    <form onSubmit={this.handleSubmit}>
-                        <div>Enter New Name</div>
+                        <div>Are you sure to delete this logo?</div>
                         <div>
-                            <input type="text" value={this.state.value} onChange={this.handleChange}/>
                             <button
-                            onClick={this.handleEnter}>
-                            Enter
+                            onClick={this.handleComfirm}>
+                            Comfirm
                             </button>
                             <button
                             onClick={this.handleCancel}>
                             Cancel
                             </button>
                         </div>
-                        
-                    </form>
                 </div>
             </div>
         )
     }
 }
 
-export default EnterTextEdit
+export default ComfirmDelete

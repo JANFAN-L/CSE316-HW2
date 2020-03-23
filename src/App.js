@@ -408,6 +408,7 @@ class App extends Component {
           logos={this.state.logos}                // THE LOGOS TO BE DISPLAYED
           addNewLogoCallback={this.addNewLogo}            // MAKE NEW LOGO CALLBACK
           goToLogoCallback={this.goToEditScreen}          // WORK ON SELECTED LOGO CALLBACK
+          EditEnterCallback={this.editEnter}
         />;
       case AppScreen.EDIT_SCREEN:
         return <EditScreen

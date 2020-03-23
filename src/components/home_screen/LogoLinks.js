@@ -1,6 +1,7 @@
 // IMPORT ALL THE THINGS NEEDED FROM OTHER JAVASCRIPT SOURCE FILES
 import React, { Component } from 'react'
 import LogoLink from './LogoLink'
+//import EnterTextEdit from './EnterTextEdit';
 
 class LogoLinks extends Component {
     constructor(props) {
@@ -29,7 +30,9 @@ class LogoLinks extends Component {
                     <LogoLink  
                         key={logo.key}
                         logo={logo}                                 // PASS THE LOGO TO THE CHILDREN
-                        goToLogoCallback={this.props.goToLogoCallback}  />  // PASS THE CALLBACK TO THE CHILDREN
+                        goToLogoCallback={this.props.goToLogoCallback}  
+                        EditEnterCallback={this.props.EditEnterCallback}/>  // PASS THE CALLBACK TO THE CHILDREN
+                        
                 ))}
             </div>
         );
